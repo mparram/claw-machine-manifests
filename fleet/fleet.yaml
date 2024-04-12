@@ -27,9 +27,9 @@ spec:
         - name: microshift-manifests
           configType: GitConfigProviderSpec
           gitRef:  
-            repository: claw-machine-fleet
+            repository: claw-machine-manifests
             targetRevision: main
-            path: /claw-machine-fleet/configuration
+            path: /configuration
         - name: pull-secret
           configType: GitConfigProviderSpec
           gitRef:
