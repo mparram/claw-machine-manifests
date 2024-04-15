@@ -2,6 +2,8 @@ apiVersion: v1alpha1
 kind: Fleet
 metadata:
   name: claw-machine-fleet
+  labels:
+    foo: bar
 spec:
   selector:
     matchLabels:
