@@ -10,27 +10,31 @@ receivers:
       network:
       paging:
       processes:
+      process:
+        metrics:
+          process.cpu.utilization:
+            enabled: true
+          process.memory.utilization:
+            enabled: true
 
 exporters:
-  file/rotation_with_custom_settings:
-    path: /var/logs/otel
-    rotation:
-      max_megabytes: 10
-      max_days: 3
-      max_backups: 3
-      localtime: true
-    format: proto
-    compression: zstd
+ otlphttp:
+    endpoint: https://otel.flightctl.edge-devices.net:443
+    tls:
+      insecure: false
+      insecure_skip_verify: true
 
 processors:
   batch: {}
+  attributes:
+    actions:
+      - action: insert
+        key: device
+        value: "fitlet2"
 
 service:
-  telemetry:
-    metrics:
-      address: 0.0.0.0:8889
   pipelines:
     metrics:
       receivers: [hostmetrics]
-      processors: [batch]
-      exporters: [file/rotation_with_custom_settings]
+      processors: [attributes,batch]
+      exporters: [otlphttp]
