@@ -6,7 +6,7 @@ metadata:
   labels:
     app: edge-ws-connector
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: edge-ws-connector
