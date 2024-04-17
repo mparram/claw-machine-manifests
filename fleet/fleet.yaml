@@ -43,4 +43,4 @@ spec:
           - "microshift.service"
           - "crio.service"
           - "flightctl-agent.service"
-          - "otelcol-contrib.service"
+          - "opentelemetry-collector-rhde.service"
