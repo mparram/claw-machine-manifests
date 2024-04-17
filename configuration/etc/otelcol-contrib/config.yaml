@@ -5,8 +5,6 @@ receivers:
       cpu:
       load:
       memory:
-      disk:
-      filesystem:
       network:
       paging:
       processes:
@@ -21,7 +19,12 @@ receivers:
             enabled: true
           process.memory.utilization:
             enabled: true
-
+  hostmetrics/disk:
+    collection_interval: 1m
+    scrapers:
+      disk:
+      filesystem:
+      
 exporters:
  otlphttp:
     endpoint: https://otel.flightctl.edge-devices.net:443
@@ -36,10 +39,14 @@ processors:
       - action: insert
         key: device
         value: "fitlet2"
+  memory_limiter:
+    check_interval: 10s
+    limit_percentage: 5
+    spike_limit_percentage: 1
 
 service:
   pipelines:
     metrics:
-      receivers: [hostmetrics]
-      processors: [attributes,batch]
+      receivers: [hostmetrics,hostmetrics/disk]
+      processors: [batch, memory_limiter, attributes]
       exporters: [otlphttp]
