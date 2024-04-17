@@ -11,7 +11,7 @@ spec:
   template:
     spec:
       os:
-        image: quay.io/mparrade/flightctl-agent-rhel@sha256:4072551452f4de2bbd76386788e243a59a7bea1018538cb25b8650f691bce278
+        image: quay.io/mparrade/flightctl-agent-rhel@sha256:9d3a5fcc7df5248055dafdb8fcc58ac16d6e1a6a93ca253ffcbbc182718ef0ed
       config:
         - name: motd-update
           configType: InlineConfigProviderSpec
