@@ -38,7 +38,7 @@ processors:
     actions:
       - action: insert
         key: device
-        value: ${env:device_fingerprint}
+        value: fitlet2
   memory_limiter:
     check_interval: 10s
     limit_percentage: 5
