@@ -41,7 +41,7 @@ spec:
           imagePullPolicy: Always
           terminationMessagePolicy: File
           image: >-
-            quay.io/rciots/edge-controller:latest
+            quay.io/mparrade/claw-edge-controller:latest
           volumeMounts:
             - name: hostpath-dev
               mountPath: /dev

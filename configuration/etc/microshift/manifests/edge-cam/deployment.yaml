@@ -56,7 +56,7 @@ spec:
           imagePullPolicy: Always
           terminationMessagePolicy: File
           image: >-
-            quay.io/rciots/edge-cam:latest
+            quay.io/mparrade/claw-edge-cam:latest
           volumeMounts:
             - name: hostpath-dev
               mountPath: /dev
