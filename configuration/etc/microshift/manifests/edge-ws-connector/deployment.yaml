@@ -6,7 +6,7 @@ metadata:
   labels:
     app: edge-ws-connector
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: edge-ws-connector
@@ -16,6 +16,17 @@ spec:
       labels:
         app: edge-ws-connector
     spec:
+      volumes:
+        - name: demo-claw-tls
+          secret:
+            secretName: demo-claw-tls
+            items:
+              - key: serverCA.crt
+                path: serverCA.crt
+              - key: client.key
+                path: client.key
+              - key: client.crt
+                path: client.crt
       restartPolicy: Always
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
@@ -30,11 +41,6 @@ spec:
                 configMapKeyRef:
                   name: edge-ws-connector
                   key: PORT
-            - name: CLI_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: edge-ws-connector
-                  key: CLI_PORT
             - name: WS_MANAGER
               valueFrom:
                 configMapKeyRef:
@@ -47,6 +53,9 @@ spec:
               protocol: TCP
           securityContext: {}
           imagePullPolicy: Always
+          volumeMounts:
+            - name: demo-claw-tls
+              mountPath: /app/certs
           terminationMessagePolicy: File
           image: >-
             quay.io/mparrade/claw-edge-ws-connector:latest
